@@ -1,0 +1,302 @@
+<div class="about-printerbridge">
+    <!-- Hero Section -->
+    <div class="text-center mb-5">
+        <h2 class="text-primary">
+            <i class="fas fa-network-wired mr-2"></i> Printer Bridge
+            <span class="badge badge-warning ml-2">BETA v1.0</span>
+        </h2>
+        <p class="lead text-muted">Phần mềm cầu nối MQTT-WebSocket cho máy in Elegoo</p>
+        <div class="mt-3">
+            <span class="badge badge-success p-2">
+                <i class="fab fa-github mr-1"></i> Mã nguồn mở - 100% minh bạch
+            </span>
+        </div>
+    </div>
+
+    <!-- Download Section -->
+    <div class="text-center mb-5 p-4 bg-light rounded">
+        <h4 class="mb-4"><i class="fas fa-download mr-2"></i> Tải xuống</h4>
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-3">
+                <a href="#" class="btn btn-primary btn-lg w-100">
+                    <i class="fas fa-file-archive mr-2"></i> Tải file EXE
+                    <br><small>Windows (64-bit)</small>
+                </a>
+            </div>
+            <div class="col-md-5 mb-3">
+                <a href="#" class="btn btn-outline-dark btn-lg w-100">
+                    <i class="fab fa-github mr-2"></i> Source Code
+                    <br><small>Tự build từ mã nguồn</small>
+                </a>
+            </div>
+        </div>
+        <p class="text-muted mt-3 mb-0">
+            <i class="fas fa-info-circle mr-1"></i> 
+            Phiên bản: 1.0.0-beta | Cập nhật: 20/12/2024
+        </p>
+    </div>
+
+    <!-- Security Notice -->
+    <div class="mb-5">
+        <h4 class="mb-4"><i class="fas fa-shield-alt mr-2 text-success"></i> Cam kết bảo mật</h4>
+        <div class="alert alert-success border-left-success mb-2">
+            <i class="fas fa-check-circle mr-2"></i>
+            <strong>Mã nguồn mở công khai</strong> - Bạn có thể xem toàn bộ code, không có mã ẩn hay backdoor
+        </div>
+        <div class="alert alert-success border-left-success mb-2">
+            <i class="fas fa-check-circle mr-2"></i>
+            <strong>Tự build được</strong> - Tải source về và tự compile nếu không tin tưởng file EXE
+        </div>
+        <div class="alert alert-success border-left-success mb-2">
+            <i class="fas fa-check-circle mr-2"></i>
+            <strong>Không thu thập dữ liệu</strong> - Phần mềm chỉ giao tiếp với máy in và server CloudPrint của bạn
+        </div>
+        <div class="alert alert-success border-left-success mb-2">
+            <i class="fas fa-check-circle mr-2"></i>
+            <strong>Chạy local</strong> - Toàn bộ xử lý diễn ra trên máy tính của bạn
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="text-center p-4 border rounded h-100">
+                <div class="mb-3">
+                    <i class="fas fa-plug fa-3x text-primary"></i>
+                </div>
+                <h5>Kết nối dễ dàng</h5>
+                <p class="text-muted">Chỉ cần nhập IP máy in và MainboardID, tự động kết nối WebSocket & MQTT.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center p-4 border rounded h-100">
+                <div class="mb-3">
+                    <i class="fas fa-cloud-download-alt fa-3x text-info"></i>
+                </div>
+                <h5>Cloud Print</h5>
+                <p class="text-muted">Nhận lệnh in từ Cloud, tự động tải file và gửi đến máy in.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center p-4 border rounded h-100">
+                <div class="mb-3">
+                    <i class="fas fa-sync-alt fa-3x text-success"></i>
+                </div>
+                <h5>Đồng bộ real-time</h5>
+                <p class="text-muted">Trạng thái máy in được cập nhật liên tục lên Cloud.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center p-4 border rounded h-100">
+                <div class="mb-3">
+                    <i class="fas fa-gamepad fa-3x text-danger"></i>
+                </div>
+                <h5>Điều khiển từ xa</h5>
+                <p class="text-muted">Pause, Resume, Stop - điều khiển máy in từ bất kỳ đâu.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center p-4 border rounded h-100">
+                <div class="mb-3">
+                    <i class="fas fa-chart-line fa-3x text-purple"></i>
+                </div>
+                <h5>Debug Mode</h5>
+                <p class="text-muted">Chế độ chi tiết với 4 panel theo dõi dữ liệu real-time.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="text-center p-4 border rounded h-100">
+                <div class="mb-3">
+                    <i class="fas fa-cog fa-3x text-secondary"></i>
+                </div>
+                <h5>Lưu cấu hình</h5>
+                <p class="text-muted">Tự động lưu IP và MainboardID, không cần nhập lại.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- How it works -->
+    <div class="mb-5">
+        <h4 class="mb-4"><i class="fas fa-cogs mr-2"></i> Cách hoạt động</h4>
+        <div class="row">
+            <div class="col-md-3 text-center mb-3">
+                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                    <span class="h4 mb-0">1</span>
+                </div>
+                <p class="mt-2"><strong>Cấu hình</strong><br><small class="text-muted">Nhập IP & MainboardID</small></p>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <div class="rounded-circle bg-info text-white d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                    <span class="h4 mb-0">2</span>
+                </div>
+                <p class="mt-2"><strong>Kết nối</strong><br><small class="text-muted">Bridge kết nối WS & MQTT</small></p>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <div class="rounded-circle bg-warning text-white d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                    <span class="h4 mb-0">3</span>
+                </div>
+                <p class="mt-2"><strong>Đồng bộ</strong><br><small class="text-muted">Gửi trạng thái lên Cloud</small></p>
+            </div>
+            <div class="col-md-3 text-center mb-3">
+                <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
+                    <span class="h4 mb-0">4</span>
+                </div>
+                <p class="mt-2"><strong>Điều khiển</strong><br><small class="text-muted">Nhận lệnh từ Cloud</small></p>
+            </div>
+        </div>
+        
+        <!-- Diagram -->
+        <div class="text-center mt-4 p-4 bg-light rounded">
+            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                <div class="p-3 bg-white rounded shadow-sm m-2">
+                    <i class="fas fa-print fa-2x text-primary"></i>
+                    <br><small>Máy in Elegoo</small>
+                </div>
+                <i class="fas fa-arrows-alt-h fa-2x text-muted mx-3"></i>
+                <div class="p-3 bg-primary text-white rounded shadow-sm m-2">
+                    <i class="fas fa-desktop fa-2x"></i>
+                    <br><small>Printer Bridge</small>
+                </div>
+                <i class="fas fa-arrows-alt-h fa-2x text-muted mx-3"></i>
+                <div class="p-3 bg-white rounded shadow-sm m-2">
+                    <i class="fas fa-cloud fa-2x text-info"></i>
+                    <br><small>CloudPrint Server</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Installation -->
+    <div class="mb-5">
+        <h4 class="mb-4"><i class="fas fa-laptop-code mr-2"></i> Cài đặt & Chạy</h4>
+        
+        <!-- Option 1: EXE -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <i class="fas fa-file-download mr-2"></i> Cách 1: Chạy file EXE (Đơn giản)
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li>Tải file <code>PrinterBridge.exe</code> từ link ở trên</li>
+                    <li>Chạy file EXE (Windows có thể cảnh báo - chọn "Run anyway")</li>
+                    <li>Nhập IP máy in và MainboardID</li>
+                    <li>Nhấn <strong>▶️ Khởi động</strong> để bắt đầu</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Option 2: Source -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <i class="fab fa-github mr-2"></i> Cách 2: Build từ mã nguồn (Nâng cao)
+            </div>
+            <div class="card-body">
+                <p class="mb-3">Yêu cầu: Python 3.8+ đã cài đặt</p>
+                <pre class="bg-dark text-success p-3 rounded"><code># Clone hoặc tải source code
+git clone https://github.com/your-repo/printer-bridge.git
+cd printer-bridge
+
+# Cài đặt dependencies
+pip install paho-mqtt websocket-client requests
+
+# Chạy chương trình
+python main.py</code></pre>
+                <p class="mt-3 mb-2"><strong>Build thành EXE:</strong></p>
+                <pre class="bg-dark text-success p-3 rounded"><code>pip install pyinstaller
+pyinstaller --onefile --windowed main.py</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="mb-5">
+        <h4 class="mb-4"><i class="fas fa-question-circle mr-2"></i> Câu hỏi thường gặp</h4>
+        
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-search mr-2"></i> Tìm MainboardID ở đâu?
+            </div>
+            <div class="card-body">
+                <ul class="mb-0">
+                    <li>Trên màn hình máy in: <strong>Settings → About → MainboardID</strong></li>
+                    <li>Trong app Elegoo: Mục thông tin máy in</li>
+                    <li>Dạng: <code>xxxxxxxxxxxx</code> (12 ký tự hex)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-wifi mr-2"></i> Tìm IP máy in?
+            </div>
+            <div class="card-body">
+                <ul class="mb-0">
+                    <li>Trên màn hình máy in: <strong>Settings → Network → IP Address</strong></li>
+                    <li>Hoặc kiểm tra trong router/DHCP của bạn</li>
+                    <li>Dạng: <code>192.168.x.x</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-desktop mr-2"></i> Chế độ Simple vs Detail?
+            </div>
+            <div class="card-body">
+                <p><strong>▶️ Khởi động (Simple):</strong> Chỉ log cơ bản, nhẹ, phù hợp chạy lâu dài</p>
+                <p class="mb-0"><strong>📊 Chi tiết (Detail):</strong> Mở thêm 4 panel debug - WebSocket data, MQTT data, Commands, Responses</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specs -->
+    <div class="mb-5">
+        <h4 class="mb-4"><i class="fas fa-microchip mr-2"></i> Thông số kỹ thuật</h4>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td><strong>Giao thức máy in</strong></td>
+                    <td>SDCP over WebSocket (port 3030)</td>
+                </tr>
+                <tr>
+                    <td><strong>Giao thức Cloud</strong></td>
+                    <td>MQTT (port 1883)</td>
+                </tr>
+                <tr>
+                    <td><strong>Máy in hỗ trợ</strong></td>
+                    <td>Elegoo FDM Series (Neptune, Centauri...)</td>
+                </tr>
+                <tr>
+                    <td><strong>Hệ điều hành</strong></td>
+                    <td>Windows 10/11 (64-bit)</td>
+                </tr>
+                <tr>
+                    <td><strong>Dependencies</strong></td>
+                    <td>paho-mqtt, websocket-client, requests, tkinter</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Warning -->
+    <div class="alert alert-warning mb-5">
+        <h5><i class="fas fa-exclamation-triangle mr-2"></i> Lưu ý quan trọng</h5>
+        <ul class="mb-0">
+            <li>Đây là phiên bản <strong>BETA</strong>, có thể còn lỗi</li>
+            <li>Máy tính chạy Bridge phải <strong>cùng mạng WiFi</strong> với máy in</li>
+            <li>Cần giữ phần mềm chạy liên tục để duy trì kết nối</li>
+            <li>Nếu gặp lỗi, hãy báo cáo để chúng tôi cải thiện</li>
+        </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="bg-light p-4 rounded">
+        <h5><i class="fas fa-headset mr-2"></i> Cần hỗ trợ?</h5>
+        <p class="mb-2">Nếu bạn gặp vấn đề hoặc có câu hỏi, hãy liên hệ:</p>
+        <ul class="list-unstyled mb-0">
+            <li><i class="fas fa-envelope mr-2"></i> Email: support@cloudprint.vn</li>
+            <li><i class="fab fa-github mr-2"></i> GitHub Issues: <a href="#">Báo lỗi / Góp ý</a></li>
+            <li><i class="fas fa-ticket-alt mr-2"></i> <a href="/tickets/">Tạo ticket hỗ trợ</a></li>
+        </ul>
+    </div>
+</div>
