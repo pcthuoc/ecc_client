@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# But not these files
+!.gitignore
+!README.md
+!guide_content.html
+!guide.html
+
+# Include dist folder for EXE
+!dist/
+!dist/PrinterBridge.exe
+
+# Source code (optional - if you want open source)
+!main.py
+!bridge.py
+!config.py
+!protocol.py
+!requirements.txt
