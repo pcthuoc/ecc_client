@@ -187,18 +187,105 @@
     <div class="mb-5">
         <h4 class="mb-4"><i class="fas fa-laptop-code mr-2"></i> Cài đặt & Chạy</h4>
         
+        <!-- Video Tutorial -->
+        <div class="alert alert-primary mb-4">
+            <h5><i class="fab fa-youtube mr-2 text-danger"></i> Video hướng dẫn</h5>
+            <p class="mb-2">Xem video hướng dẫn chi tiết từng bước:</p>
+            <a href="https://www.youtube.com/watch?v=YOUR_VIDEO_ID" target="_blank" class="btn btn-danger">
+                <i class="fab fa-youtube mr-2"></i> Xem trên YouTube
+            </a>
+        </div>
+
+        <!-- What is EXE -->
+        <div class="card mb-4">
+            <div class="card-header bg-secondary text-white">
+                <i class="fas fa-question-circle mr-2"></i> File EXE là gì?
+            </div>
+            <div class="card-body">
+                <p><strong>PrinterBridge.exe</strong> là phần mềm chạy trên Windows, đóng vai trò <strong>cầu nối</strong> giữa máy in Elegoo và hệ thống CloudPrint.</p>
+                <ul class="mb-0">
+                    <li><i class="fas fa-plug text-primary mr-1"></i> Kết nối với máy in qua <strong>WebSocket</strong> (mạng nội bộ)</li>
+                    <li><i class="fas fa-cloud text-info mr-1"></i> Kết nối với server qua <strong>MQTT</strong> (internet)</li>
+                    <li><i class="fas fa-sync text-success mr-1"></i> Đồng bộ trạng thái và nhận lệnh điều khiển từ xa</li>
+                    <li><i class="fas fa-desktop text-warning mr-1"></i> Cần giữ phần mềm chạy liên tục trên máy tính</li>
+                </ul>
+            </div>
+        </div>
+
         <!-- Option 1: EXE -->
         <div class="card mb-4">
             <div class="card-header bg-primary text-white">
-                <i class="fas fa-file-download mr-2"></i> Cách 1: Chạy file EXE (Đơn giản)
+                <i class="fas fa-file-download mr-2"></i> Hướng dẫn cài đặt (File EXE)
             </div>
             <div class="card-body">
-                <ol>
-                    <li>Tải file <code>PrinterBridge.exe</code> từ link ở trên</li>
-                    <li>Chạy file EXE (Windows có thể cảnh báo - chọn "Run anyway")</li>
-                    <li>Nhập IP máy in và MainboardID</li>
-                    <li>Nhấn <strong>▶️ Khởi động</strong> để bắt đầu</li>
-                </ol>
+                <div class="step-guide">
+                    <h6 class="text-primary"><i class="fas fa-download mr-2"></i> Bước 1: Tải và chạy phần mềm</h6>
+                    <ul>
+                        <li>Tải file <code>PrinterBridge.exe</code> từ link ở trên</li>
+                        <li>Chạy file EXE (Windows có thể cảnh báo - chọn <strong>"Run anyway"</strong>)</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h6 class="text-primary"><i class="fas fa-wifi mr-2"></i> Bước 2: Kết nối máy in</h6>
+                    <ul>
+                        <li>Nhập <strong>IP máy in</strong> (ví dụ: <code>192.168.1.100</code>)</li>
+                        <li>Nhấn <strong>🔍 Test</strong> để kiểm tra kết nối</li>
+                        <li>Nếu hiện <span class="text-success">✅ OK</span> là thành công</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h6 class="text-primary"><i class="fas fa-fingerprint mr-2"></i> Bước 3: Lấy ID máy in</h6>
+                    <ul>
+                        <li>Nhấn <strong>📡 Lấy ID</strong> để tự động lấy Mainboard ID</li>
+                        <li>ID sẽ tự động điền vào ô Mainboard</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h6 class="text-primary"><i class="fas fa-tag mr-2"></i> Bước 4: Đặt tên máy in</h6>
+                    <ul>
+                        <li>Nhập <strong>Tên máy in</strong> (ví dụ: "Máy in phòng 1", "Neptune 4 Pro"...)</li>
+                        <li>Nhấn <strong>💾 Lưu</strong> để lưu cấu hình</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h6 class="text-primary"><i class="fas fa-cloud-upload-alt mr-2"></i> Bước 5: Đăng ký lên server</h6>
+                    <ul>
+                        <li>Nhấn <strong>🚀 Register</strong> để đăng ký máy in lên CloudPrint</li>
+                        <li>Chờ hiện thông báo <span class="text-success">✅ Register: created</span></li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h6 class="text-primary"><i class="fas fa-key mr-2"></i> Bước 6: Lấy API Key</h6>
+                    <ul>
+                        <li>Truy cập website CloudPrint: <a href="https://ecc.goldedu.vn" target="_blank">ecc.goldedu.vn</a></li>
+                        <li>Đăng nhập tài khoản của bạn</li>
+                        <li>Vào <strong>Profile</strong> → tìm mục <strong>API Key</strong></li>
+                        <li>Nhấn <strong>Copy</strong> để sao chép API Key</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h6 class="text-primary"><i class="fas fa-paste mr-2"></i> Bước 7: Dán API Key</h6>
+                    <ul>
+                        <li>Quay lại phần mềm PrinterBridge</li>
+                        <li>Dán API Key vào ô <strong>API Key</strong></li>
+                        <li>Nhấn <strong>💾 Lưu</strong></li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h6 class="text-success"><i class="fas fa-play mr-2"></i> Bước 8: Khởi động</h6>
+                    <ul>
+                        <li>Nhấn <strong>▶️ Khởi động</strong> để bắt đầu</li>
+                        <li>Đợi hiện <span class="text-success">🟢 WS: OK</span> và <span class="text-success">🟢 MQTT: OK</span></li>
+                        <li>🎉 <strong>Hoàn tất!</strong> Máy in đã kết nối với CloudPrint</li>
+                    </ul>
+                </div>
             </div>
         </div>
 

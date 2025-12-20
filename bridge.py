@@ -54,7 +54,9 @@ class PrinterBridge:
         
         r2 = ttk.Frame(cfg); r2.pack(fill=tk.X, pady=2)
         ttk.Label(r2, text="Mainboard:", width=10).pack(side=tk.LEFT)
-        self.mid = ttk.Entry(r2, width=42); self.mid.pack(side=tk.LEFT)
+        self.mid = ttk.Entry(r2, width=25); self.mid.pack(side=tk.LEFT, padx=(0,5))
+        ttk.Label(r2, text="Tên:").pack(side=tk.LEFT)
+        self.pname = ttk.Entry(r2, width=15); self.pname.pack(side=tk.LEFT, padx=3)
         
         r3 = ttk.Frame(cfg); r3.pack(fill=tk.X, pady=2)
         ttk.Label(r3, text="MQTT:", width=10).pack(side=tk.LEFT)
@@ -62,6 +64,7 @@ class PrinterBridge:
         ttk.Label(r3, text="Port:").pack(side=tk.LEFT)
         self.mqttport = ttk.Entry(r3, width=6); self.mqttport.pack(side=tk.LEFT, padx=(3,8))
         ttk.Button(r3, text="💾Lưu", command=self.save_ui, width=7).pack(side=tk.LEFT)
+        ttk.Button(r3, text="🚀Register", command=self.auto_register, width=10).pack(side=tk.LEFT, padx=3)
         
         r4 = ttk.Frame(cfg); r4.pack(fill=tk.X, pady=2)
         ttk.Label(r4, text="API Key:", width=10).pack(side=tk.LEFT)
@@ -97,6 +100,7 @@ class PrinterBridge:
         self.ip.insert(0, config.get("printer_ip", ""))
         self.port.insert(0, str(config.get("printer_port", 3030)))
         self.mid.insert(0, config.get("mainboard_id", ""))
+        self.pname.insert(0, config.get("printer_name", ""))
         self.mqtt.insert(0, config.get("mqtt_broker", ""))
         self.mqttport.insert(0, str(config.get("mqtt_port", 1883)))
         self.api.insert(0, config.get("api_key", ""))
@@ -105,7 +109,8 @@ class PrinterBridge:
         config.update({
             "printer_ip": self.ip.get(), 
             "printer_port": int(self.port.get() or 3030),
-            "mainboard_id": self.mid.get(), 
+            "mainboard_id": self.mid.get(),
+            "printer_name": self.pname.get(),
             "mqtt_broker": self.mqtt.get(),
             "mqtt_port": int(self.mqttport.get() or 1883), 
             "api_key": self.api.get()
@@ -148,6 +153,96 @@ class PrinterBridge:
             except Exception as e:
                 self.root.after(0, lambda: self.log_msg(f"Lỗi: {e}", "❌"))
         threading.Thread(target=g, daemon=True).start()
+
+    def auto_register(self):
+        ip, port = self.ip.get(), self.port.get() or "3030"
+        api_key = self.api.get()
+        pname = self.pname.get()
+        
+        if not ip:
+            return self.log_msg("Chưa nhập IP máy in!", "⚠️")
+        if not api_key:
+            return self.log_msg("Chưa nhập API Key!", "⚠️")
+        if not pname:
+            return self.log_msg("Chưa nhập tên máy in!", "⚠️")
+        
+        self.log_msg("Auto Register: Đang lấy ID...", "🔄")
+        
+        def do_register():
+            mid = self.mid.get()
+            
+            # Nếu chưa có mainboard ID, lấy từ máy in
+            if not mid:
+                try:
+                    ws = websocket.create_connection(f"ws://{ip}:{port}/websocket", timeout=10)
+                    ws.send(json.dumps({"Id": str(uuid.uuid4()), "Data": {"Cmd": 0, "Data": {}, 
+                        "RequestID": str(uuid.uuid4()), "MainboardID": "", "TimeStamp": int(time.time()), "From": 0}, 
+                        "Topic": "sdcp/request/"}))
+                    ws.settimeout(5)
+                    while True:
+                        r = ws.recv()
+                        if r.strip() in ['"pong"', 'pong']: continue
+                        d = json.loads(r)
+                        mid = d.get("Attributes", {}).get("MainboardID") or d.get("Data", {}).get("MainboardID") or d.get("MainboardID")
+                        if mid:
+                            ws.close()
+                            self.root.after(0, lambda m=mid: [self.mid.delete(0, tk.END), self.mid.insert(0, m)])
+                            self.root.after(0, lambda m=mid: self.log_msg(f"Lấy ID: {m}", "✅"))
+                            break
+                except Exception as e:
+                    err = str(e)
+                    self.root.after(0, lambda err=err: self.log_msg(f"Lỗi lấy ID: {err}", "❌"))
+                    return
+            
+            if not mid:
+                self.root.after(0, lambda: self.log_msg("Không lấy được Mainboard ID!", "❌"))
+                return
+            
+            # Gọi API register
+            self.root.after(0, lambda: self.log_msg("Đang đăng ký lên server...", "🔄"))
+            try:
+                url = "https://ecc.goldedu.vn/api/client/printers/register/"
+                payload = {
+                    "api_key": api_key,
+                    "motherboard_id": mid,
+                    "name": pname,
+                    "ip_local": ip
+                }
+                self.root.after(0, lambda u=url, p=mid: self.log_msg(f"POST {u} | ID: {p}", "📤"))
+                
+                resp = requests.post(
+                    url,
+                    headers={"Content-Type": "application/json"},
+                    json=payload,
+                    timeout=30
+                )
+                
+                # Check HTTP status (200, 201 đều OK)
+                if resp.status_code not in [200, 201]:
+                    err_msg = f"HTTP {resp.status_code}: {resp.text[:100]}"
+                    self.root.after(0, lambda e=err_msg: self.log_msg(f"API Error: {e}", "❌"))
+                    return
+                
+                result = resp.json()
+                status = result.get("status", "error")
+                message = result.get("message", "Unknown")
+                printer_id = result.get("printer_id", "")
+                
+                if status in ["created", "updated", "exists"]:
+                    # Lưu config sau khi đăng ký thành công
+                    self.root.after(0, lambda: self.save_ui())
+                    icon = "✅" if status == "created" else ("🔄" if status == "updated" else "ℹ️")
+                    self.root.after(0, lambda s=status, m=message, p=printer_id, i=icon: self.log_msg(f"Register: {s} - {m} (ID: {p})", i))
+                else:
+                    self.root.after(0, lambda m=message: self.log_msg(f"Register lỗi: {m}", "❌"))
+            except requests.exceptions.JSONDecodeError:
+                resp_text = resp.text[:150] if resp else "No response"
+                self.root.after(0, lambda r=resp_text: self.log_msg(f"API trả về không hợp lệ: {r}", "❌"))
+            except Exception as e:
+                err = str(e)
+                self.root.after(0, lambda err=err: self.log_msg(f"Lỗi API: {err}", "❌"))
+        
+        threading.Thread(target=do_register, daemon=True).start()
 
     def start(self):
         if not self.ip.get() or not self.mid.get() or not self.api.get():

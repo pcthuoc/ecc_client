@@ -1,10 +1,11 @@
 {
-  "printer_ip": "192.168.0.100",
+  "printer_ip": "127.0.0.1",
   "printer_port": 3030,
-  "mainboard_id": "1c7118d30105041800009c0000000000",
-  "mqtt_broker": "103.252.136.112",
+  "mainboard_id": "SIMULATOR_001",
+  "mqtt_broker": "mqtt.goldedu.vn",
   "mqtt_port": 1883,
   "api_key": "4591ebe34be21efad2325cc21bbd2f944396ce37ab3d2d2835d5727fb5370aac",
   "read_interval": 5,
-  "max_files_to_mqtt": 20
+  "max_files_to_mqtt": 20,
+  "printer_name": "Máy demo"
 }
