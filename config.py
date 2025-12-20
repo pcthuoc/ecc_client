@@ -19,7 +19,7 @@ DEFAULT_CONFIG = {
     "printer_ip": "192.168.0.100",
     "printer_port": 3030,
     "mainboard_id": "",
-    "mqtt_broker": "103.252.136.112",
+    "mqtt_broker": "mqtt.goldedu.vn",
     "mqtt_port": 1883,
     "api_key": "4a9124de9687d5a3d9634c2940c64bed5aa4432ecd3785fa0be8284bc90980e7",
     "read_interval": 5,
